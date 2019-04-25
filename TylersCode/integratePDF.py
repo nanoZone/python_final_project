@@ -6,13 +6,13 @@ Tyler Bramlett
 This file will open and save information to .pdf
 This file will read from a .txt file and read in all the lines and search for specific data and will save it to .pdf
 This file will also export information to a pdf, simply called "simple_demo.pdf"
-Still working on OPENING a pdf and utilizing its contents
 '''
 
 import os
 import PyPDF2
 from fpdf import FPDF
 
+# STILL WORKING ON OPENING A PDF TO UTILIZE ITS CONTENTS
 
 # Create decorator for pdf function, to read from file then exported as a .pdf
 def readFromFile(fileName):
