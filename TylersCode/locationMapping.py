@@ -12,7 +12,7 @@ import webbrowser
 import time
 import datetime
 
-
+# NOTE I WISH TO MAKE THESE DECORATORS TO COMBINE AND MAKE CODE MORE COMPLEX
 def reportLocation(address, status):
     print("\n\nPERSON'S CONDITION: " + str(status))
     print("LAST KNOWN LOCATION: " + str(address))
