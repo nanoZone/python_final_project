@@ -5,7 +5,7 @@ Tyler Bramlett
 
 This file will visually present a person's location and display multple destinations on Google Maps.
 On Google Maps, if there is more than one location, it will show the distance/time between them.
-
+It will also pull in data from a EmergencyLog file, and search for LOCATIONs and plot a previous and current location within Google Maps.
 '''
 
 import webbrowser
@@ -50,4 +50,3 @@ currentStatus = "Safe, Battery Low, Uninjured"
 # reportLocation("UCCS Library", currentStatus)
 
 createLocationMap(getPreviousLocation("EmergencyLog.txt"))
-
