@@ -4,7 +4,7 @@ Emergency Distress Program
 Tyler Bramlett
 
 This file will open and save information to .pdf
-This file will read from a .txt file and read in all the lines and search for LOCATIONs and will save it to .pdf
+This file will read from a .txt file and read in all the lines and search for specific data and will save it to .pdf
 This file will also export information to a pdf, simply called "simple_demo.pdf"
 Still working on OPENING a pdf and utilizing its contents
 '''
@@ -32,8 +32,12 @@ def exportAsPDF(message):
 
 
 def openPDF():
-    print("General Kenobi")
+    # WORK ON THIS
+    print("Hello There")
 
+def selectDataPDF():
+    # WORK ON THIS
+    print("General Kenobi")
 
 exportAsPDF(readFromFile("EmergencyLog.txt"))
 
