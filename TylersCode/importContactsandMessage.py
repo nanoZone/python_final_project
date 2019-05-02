@@ -11,7 +11,7 @@ import os
 import time
 import datetime
 
-def getPreviousLocation(file):
+def getLastLocation(file):
     locationList = []
     with open(file, 'rt') as myfile:    # Open file lorem.txt for reading text
         for line in myfile:             # For each line, read it to a string
