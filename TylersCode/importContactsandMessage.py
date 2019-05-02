@@ -8,3 +8,17 @@ def getPreviousLocation(file):
                 # print(line.replace("LOCATION:", ''))
 return locationList
 
+
+def readFromFile(file):
+    os.getcwd()
+    logFile = open(file)
+    print(f"\n\nREADING CONTENTS OF FILE: {file}\n\n" + logFile.read())
+    time.sleep(1)
+    print(logFile.read())
+logFile.close()
+
+def readFromFile(fileName):
+    os.getcwd()
+    logFile = open(fileName, 'r')
+    # READLINES() IS A LIST OF STRINGS FOR EACH LINE
+return logFile.readlines()
