@@ -1,0 +1,16 @@
+import re
+
+# input statement
+
+s = input("Please provide best phone number xxx-xxx-xxxx, email, and brief description of your emergency: ")
+
+# \S matches any non-whitespace character
+# @ for as in the Email
+# + for Repeats a character one or more times
+lst = re.findall('\S+@\S+', s)
+lst1 = re.findall('\S[0-9]+\S+-\S[0-9]+', s)
+
+
+# Printing of List
+print("email address: ", lst)
+print("phone numbers are: ", lst1)
