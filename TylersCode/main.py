@@ -29,7 +29,7 @@ def exportAsPDF(message):
     pdf.set_font("Courier", size=12)
     for line in message:
         pdf.cell(200, 10, txt=line, ln=1, align="A")
-    pdf.output("simple_demo.pdf")
+    pdf.output("Emergency_Data.pdf")
 
 
 def findWeatherData():
@@ -153,8 +153,14 @@ def regexPhoneNumbers():
 
 
 '''
+
+# Regex contact info within file
 findContactInfoInFile("EmergencyInfo.txt")
+
+# Creates a tracking of locations the person
 createLocationMap(getPreviousLocation("EmergencyLog.txt"))
+
+# Converts the Emergency Log to a sharable .pdf
 exportAsPDF(readLinesFromFile("EmergencyLog.txt"))
 
 # Global vars to use across files:
