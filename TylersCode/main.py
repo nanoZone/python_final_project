@@ -38,7 +38,7 @@ def findWeatherData():
     # base url variable to store url
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     # enter city name
-    city_name = input("Enter city name: ")
+    city_name = input("\nENTER THE CURRENT CITY YOU ARE LOCATED IN >> ")
     # complete_url variable to store complete url address
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name
     # return respone object and get method
@@ -75,11 +75,12 @@ def findWeatherData():
 
 
 def reportLocation(address, status):
-    print("\n\nPERSON'S CONDITION: " + str(status))
-    print("LAST KNOWN LOCATION: " + str(address))
+    print("\n\nCURRENT CONDITION: " + str(status))
+    print("CURRENT LOCATION: " + str(address))
     print("PIN-POINTING POSITION ON GOOGLE MAPS ...\n")
     webbrowser.open("https://www.google.com/maps/search/" + str(address))
     return address
+
 
 def createLocationMap(locations):
     if len(locations) >= 2:
@@ -112,14 +113,6 @@ def readContentsFromFile(file):
     logFile.close()
 
 
-def addToFile(data, file):
-    os.getcwd()
-    logFile = open(file, "a")
-    logFile.write(data + "\n")
-    logFile.write(str(datetime.datetime.now()) + "\n")
-    logFile.close()
-
-
 def findContactInfoInFile(file):
 
     os.getcwd()
@@ -130,9 +123,8 @@ def findContactInfoInFile(file):
     phoneList = phoneNumRegex.findall(string)
 
     # Printing of List
-    print("Email addresses within this file are: ", emailList)
-    print("Phone numbers within this file are: ", phoneList)
-
+    print(f"Email addresses within {file} are: ", emailList)
+    print(f"Phone numbers within {file} are: ", phoneList)
     logFile.close()
 
 
@@ -154,7 +146,7 @@ def regexPhoneNumbers():
 
 def enterContactInfo(targetFile):
 
-    infoFile = open(targetFile, "a")
+    infoFile = open(targetFile, "w")
 
     # Personal
     idNum = str(input("\nENTER A 5 DIGIT ID NUMBER:"))
@@ -174,24 +166,17 @@ def enterContactInfo(targetFile):
     bloodType = str(input("\nENTER A BLOODTYPE OR ENTER 'UNKNOWN':"))
     infoFile.write("BloodType: " + bloodType + "\n")
 
-    # I REMOVED THIS PART FOR TIME'S SAKE
     # Contacts:
+    print("\nHOW MANY EMERGENCY CONTACTS DO YOU WISH TO ENTER?")
+    contactAmount = int(input())
 
-    # Contact 1
-    contact1Name = str(input("\nENTER AN EMERGENCY CONTACT (FULL NAME):"))
-    infoFile.write("Contact 1 Name: " + contact1Name + "\n")
-    contact1Num = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
-    infoFile.write("Contact 1 Number: " + contact1Num + "\n")
-    # Contact 2
-    contact2Name = str(input("\nENTER A SECONDARY EMERGENCY CONTACT (FULL NAME):"))
-    infoFile.write("Contact 2 Name: " + contact2Name + "\n")
-    contact2Num = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
-    infoFile.write("Contact 2 Number: " + contact2Num + "\n")
-    # Contact 3
-    contact3Name = str(input("\nENTER A FINAL EMERGENCY CONTACT (FULL NAME):"))
-    infoFile.write("Contact 3 Name: " + contact3Name + "\n")
-    contact3Num = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
-    infoFile.write("Contact 3 Number: " + contact3Num + "\n")
+    for i in range(0, contactAmount):
+        # Contact Loop
+        num = i + 1
+        contactName = str(input("\nENTER AN EMERGENCY CONTACT (FULL NAME):"))
+        infoFile.write("Contact " + str(num) + " Name: " + str(contactName) + "\n")
+        contactNum = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
+        infoFile.write("Contact " + str(num) + " Number: " + str(contactNum) + "\n")
 
     infoFile.close()
 
@@ -216,59 +201,90 @@ def displayCurrentTime():
     # 03/05/19 20:40:40
 
 
-'''
-# Regex contact info within file
-findContactInfoInFile("EmergencyInfo.txt")
+def addToFile(data, file):
+    os.getcwd()
+    logFile = open(file, "a")
+    logFile.write(data + "\n")
+    logFile.write(str(datetime.datetime.now()) + "\n")
+    logFile.close()
 
-# Creates a tracking of locations the person
-createLocationMap(getPreviousLocation("EmergencyLog.txt"))
 
-# Converts the Emergency Log to a sharable .pdf
-exportAsPDF(readLinesFromFile("EmergencyLog.txt"))
+# MAIN SERVER:
 
-# Global vars to use across files:
-currentAddress = "F.E.M.A. Station Colorado Springs"
-currentStatus = "Safe, Battery Low, Uninjured"
+
+# LAMBDA FUNCTIONS / DECORATORS / COMMENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # File names to use:
-fileName001 = "EmergencyLog.txt"
-fileName002 = "EmergencyInfo.txt"
-
-# Add specific data to file:
-addToFile("\nLOCATION: " + currentAddress, fileName001)
-addToFile("STATUS: " + currentStatus, fileName001)
-
-# Read data from these files
-readContentsFromFile(fileName001)
-readContentsFromFile(fileName002)
-'''
-
-# LAMBDA FUNCTIONS / DECORATORS
+emergencyLogFile = "EmergencyLog.txt"
+emergencyInfoFile = "EmergencyInfo.txt"
 
 print("\n\n\n+++ EMERGENCY DISTRESS PROGRAM +++")
 print("\n")
-# Ask for data to enter or use a file to use instead
-print("\nWOULD YOU LIKE TO U")
-# Save file to .pdf to share
-# Ask for location updates
-# Pin point onto google maps
-# Look for contacts within data file
-# Send data to them (SMS/Email)
-# Web scrape for weather info
-# Save logging to .pdf
-# Share logging file
 
+# Ask for data to enter or use a file to use instead
+c = 'N'
+print("\nWOULD YOU LIKE TO ENTER IN NEW PERSONAL/MEDICAL INFO [Y] OR USE ALREADY EXISTING DATA [N] ?")
+c = input().upper()
+
+if c == 'Y':
+    enterContactInfo(emergencyInfoFile)
+
+# Converts the Emergency Medical/Personal Data to a sharable .pdf
+exportAsPDF(readLinesFromFile(emergencyInfoFile))
+
+# Show info file contents
+readContentsFromFile(emergencyInfoFile)
+
+# Start with a base location and status:
+currentPosition = checkPosition()
+currentStatus = checkCondition()
+
+# Upload this data to the log:
+addToFile("\nLOCATION: " + currentPosition, emergencyLogFile)
+addToFile("STATUS: " + currentStatus, emergencyLogFile)
+
+# Show location:
+reportLocation(currentPosition, currentStatus)
+
+
+# Ask for location updates
 while True:
-    strIn = input("\nUPDATE CONDITIONS(s)? Enter [YES] or [NO] >> ")
+    strIn = input("\nUPDATE LOCATION AND STATUS CONDITIONS(s)? Enter [YES] or [NO] >> ")
     strIn = strIn.upper()
     if strIn == "NO" or strIn != "YES":
         if strIn != "NO":
-            print("\nYOU HAVE NOT ENTERED A CORRECT STRING")
+            print("\nYOU HAVE NOT ENTERED A CORRECT STRING!!!")
             break
         break
-    #readFromLog()
-    currentAddress = checkPosition()
-    displayCurrentTime()
-    reportPosition(currentAddress)
-    addToLog(currentAddress)
+    # Enter a  new location and status:
+    currentPosition = checkPosition()
+    currentStatus = checkCondition()
 
+    # Upload this data to the log, again:
+    addToFile("\nLOCATION: " + currentPosition, emergencyLogFile)
+    addToFile("STATUS: " + currentStatus, emergencyLogFile)
+    # Pin point onto google maps
+    reportLocation(currentPosition, currentStatus)
+
+
+# Track previous locations onto Google Maps
+createLocationMap(getPreviousLocation(emergencyLogFile))
+
+# Look for contacts within data file
+print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} ...")
+findContactInfoInFile(emergencyInfoFile)
+
+# Send data to them (SMS/Email)
+
+
+# Web scrape for local weather info
+findWeatherData()
+
+# Save logging to .pdf
+exportAsPDF(readLinesFromFile(emergencyLogFile))
+
+# Show log file contents
+print(f"\nCONTENTS OF {emergencyLogFile} : \n")
+readContentsFromFile(emergencyLogFile)
+
+# Share logging file
