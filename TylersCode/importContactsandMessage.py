@@ -12,33 +12,28 @@ import re
 import datetime
 
 
-def getLastLocation(file):
-    locationList = []
-    with open(file, 'rt') as myfile:    # Open file lorem.txt for reading text
-        for line in myfile:             # For each line, read it to a string
-            if "LOCATION: " in line:
-                locationList.append(line.replace("LOCATION:", ''))
-                # print(line.replace("LOCATION:", ''))
-    return locationList
-
-
-def readFromFile(fileName):
-    os.getcwd()
-    logFile = open(fileName, 'r')
-    # READLINES() IS A LIST OF STRINGS FOR EACH LINE
-    return logFile.readlines()
-
-
 def findContactInfoInFile(file):
     os.getcwd()
     logFile = open(file)
-    print(f"\n\nREADING CONTENTS OF FILE: {file}\n\n" + logFile.read())
-    time.sleep(1)
     emailList = re.findall('\S+@\S+', logFile.read())
     phoneList = re.findall('\S[0-9]+\S+-\S[0-9]+', logFile.read())
-
     # Printing of List
     print("Email addresses within this file are: ", emailList)
     print("Phone numbers within this file are: ", phoneList)
-
     logFile.close()
+
+
+def regexPhoneNumbers():
+    # input statement
+    s = input("Please provide best phone number xxx-xxx-xxxx, email,")
+    # \S matches any non-whitespace character
+    # @ for as in the Email
+    # + for Repeats a character one or more times
+    lst = re.findall('\S+@\S+', s)
+    lst1 = re.findall('\S[0-9]+\S+-\S[0-9]+', s)
+    # Printing of List
+    print("email address: ", lst)
+    print("phone numbers are: ", lst1)
+
+
+findContactInfoInFile("EmergencyInfo.txt")
