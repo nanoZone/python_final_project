@@ -47,6 +47,4 @@ currentStatus = "Safe, Battery Low, Uninjured"
 
 # Call function(s):
 
-# reportLocation("UCCS Library", currentStatus)
-
 createLocationMap(getPreviousLocation("EmergencyLog.txt"))
