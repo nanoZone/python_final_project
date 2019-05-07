@@ -152,13 +152,10 @@ def regexPhoneNumbers():
     print("phone numbers are: ", lst1)
 
 
+'''
 findContactInfoInFile("EmergencyInfo.txt")
-
 createLocationMap(getPreviousLocation("EmergencyLog.txt"))
-
-
 exportAsPDF(readLinesFromFile("EmergencyLog.txt"))
-
 
 # Global vars to use across files:
 currentAddress = "F.E.M.A. Station Colorado Springs"
@@ -175,3 +172,4 @@ addToFile("STATUS: " + currentStatus, fileName001)
 # Read data from these files
 readContentsFromFile(fileName001)
 readContentsFromFile(fileName002)
+'''
