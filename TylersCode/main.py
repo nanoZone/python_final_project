@@ -1,11 +1,19 @@
 #! Python3
 '''
-Final Group Project
-CS 3020
-@authors Tyler Bramlett, Lucas Garcia, Nate Ross
+Python Final Group Project
+CS 3030
+@group members: Tyler Bramlett, Lucas Garcia, Nate Ross
+
 This is a Emergency Distress program!
+This program will log/track/send/update data on a person in a disaster or emergency.
+This program will provide an interface and visually show a missing person's location history.
+This program utilizes two outside files: EmergencyLog.txt, EmergencyInfo.txt
+These files will store data on a person's personal and medical information.
+Within the program, the two files will be converted into .pdf so they can be shared to emergency contacts
+Emergency contacts will also receive updates on a person's status, condition, and location.
 '''
 
+import smtplib
 import requests
 import re
 import webbrowser
@@ -13,6 +21,37 @@ import time
 import datetime
 import os
 from fpdf import FPDF
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+
+def sendEmail(signal):
+    # list of email_id to send the mail
+    li = ["EmergencyDistressSignal223@gmail.com"]
+    newEmail = str(input("\nENTER AN EMAIL ADDRESS >> "))
+    li.append(newEmail)
+
+    email = "EmergencyDistressSignal223@gmail.com"
+    password = str(input("\nENTER SERVER PASSWORD >> "))
+    send_to_email = 'EmergencyDistressSignal223@gmail.com'
+    subject = "+++ TEST MESSAGE +++"
+    message = signal
+
+    msg = MIMEMultipart()
+    msg['From'] = email
+    msg['To'] = send_to_email
+    msg['Subject'] = subject
+
+    # Attach the message to the MIMEMultipart object
+    msg.attach(MIMEText(message, 'plain'))
+
+    for i in range(len(li)):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(email, password)
+        text = msg.as_string()
+        server.sendmail(email, li[i], text)
+    server.quit()
 
 
 # Create decorator for pdf function, to read from file then exported as a .pdf
@@ -126,6 +165,7 @@ def findContactInfoInFile(file):
     print(f"Email addresses within {file} are: ", emailList)
     print(f"Phone numbers within {file} are: ", phoneList)
     logFile.close()
+    return emailList
 
 
 def regexPhoneNumbers():
@@ -173,10 +213,12 @@ def enterContactInfo(targetFile):
     for i in range(0, contactAmount):
         # Contact Loop
         num = i + 1
-        contactName = str(input("\nENTER AN EMERGENCY CONTACT (FULL NAME):"))
+        contactName = str(input("\nENTER AN EMERGENCY CONTACT (FULL NAME) :"))
         infoFile.write("Contact " + str(num) + " Name: " + str(contactName) + "\n")
-        contactNum = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
+        contactNum = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000 :"))
         infoFile.write("Contact " + str(num) + " Number: " + str(contactNum) + "\n")
+        contactEmail = str(input("\nENTER THEIR EMAIL IN THE FORMAT xxxxx@mail.com :"))
+        infoFile.write("Contact " + str(num) + " Email: " + str(contactEmail) + "\n")
 
     infoFile.close()
 
@@ -272,7 +314,7 @@ createLocationMap(getPreviousLocation(emergencyLogFile))
 
 # Look for contacts within data file
 print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} TO SEND UPDATE(s) ...")
-findContactInfoInFile(emergencyInfoFile)
+emails = findContactInfoInFile(emergencyInfoFile)
 
 # Send data to them (SMS/Email)
 
