@@ -256,8 +256,6 @@ def addToFile(data, file):
 # MAIN SERVER:
 
 
-# LAMBDA FUNCTIONS / DECORATORS / COMMENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 # File names to use:
 emergencyLogFile = "EmergencyLog.txt"
 emergencyInfoFile = "EmergencyInfo.txt"
@@ -294,6 +292,11 @@ addToFile("STATUS: " + currentStatus, emergencyLogFile)
 # Show location:
 reportLocation(currentPosition, currentStatus)
 
+# Send data to them (SMS/Email)
+content = str(
+    "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
+sendEmail(content, emails)
+
 # Ask for location updates
 while True:
     strIn = input("\nUPDATE LOCATION AND STATUS CONDITIONS(s)? Enter [YES] or [NO] >> ")
@@ -312,16 +315,16 @@ while True:
     addToFile("STATUS: " + currentStatus, emergencyLogFile)
     # Pin point onto google maps
     reportLocation(currentPosition, currentStatus)
+    # Send data to them (SMS/Email)
+    content = str(
+        "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
+    sendEmail(content, emails)
 
 # Track previous locations onto Google Maps
 createLocationMap(getPreviousLocation(emergencyLogFile))
 
-# Send data to them (SMS/Email)
-content = str(
-    "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
-sendEmail(content, emails)
-
 # Web scrape for local weather info
+time.sleep(3)
 findWeatherData()
 
 # Save logging to .pdf
