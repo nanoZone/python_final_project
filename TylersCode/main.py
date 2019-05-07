@@ -1,4 +1,3 @@
-#! Python3
 '''
 Python Final Group Project
 CS 3030
@@ -25,12 +24,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def sendEmail(signal):
+def sendEmail(signal, emailList):
     # list of email_id to send the mail
-    li = ["EmergencyDistressSignal223@gmail.com"]
-    newEmail = str(input("\nENTER AN EMAIL ADDRESS >> "))
-    li.append(newEmail)
-
     email = "EmergencyDistressSignal223@gmail.com"
     password = str(input("\nENTER SERVER PASSWORD >> "))
     send_to_email = 'EmergencyDistressSignal223@gmail.com'
@@ -45,12 +40,12 @@ def sendEmail(signal):
     # Attach the message to the MIMEMultipart object
     msg.attach(MIMEText(message, 'plain'))
 
-    for i in range(len(li)):
+    for i in range(len(emailList)):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(email, password)
         text = msg.as_string()
-        server.sendmail(email, li[i], text)
+        server.sendmail(email, emailList[i], text)
     server.quit()
 
 
@@ -317,7 +312,8 @@ print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} TO SEND UPDATE(
 emails = findContactInfoInFile(emergencyInfoFile)
 
 # Send data to them (SMS/Email)
-
+content = "I am safe, this is a test message for our final project ..."
+sendEmail(content)
 
 # Web scrape for local weather info
 findWeatherData()
