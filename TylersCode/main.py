@@ -2,7 +2,7 @@
 '''
 Final Group Project
 CS 3020
-@author Tyler Bramlett
+@authors Tyler Bramlett, Lucas Garcia, Nate Ross
 This is a Emergency Distress program!
 '''
 
@@ -232,7 +232,8 @@ readContentsFromFile(fileName002)
 
 print("\n\n\n+++ EMERGENCY DISTRESS PROGRAM +++")
 print("\n")
-# Loop and ask for data to enter or use a file
+# Ask for data to enter or use a file to use instead
+print("\nWOULD YOU LIKE TO U")
 # Save file to .pdf to share
 # Ask for location updates
 # Pin point onto google maps
@@ -241,4 +242,18 @@ print("\n")
 # Web scrape for weather info
 # Save logging to .pdf
 # Share logging file
+
+while True:
+    strIn = input("\nUPDATE CONDITIONS(s)? Enter [YES] or [NO] >> ")
+    strIn = strIn.upper()
+    if strIn == "NO" or strIn != "YES":
+        if strIn != "NO":
+            print("\nYOU HAVE NOT ENTERED A CORRECT STRING")
+            break
+        break
+    #readFromLog()
+    currentAddress = checkPosition()
+    displayCurrentTime()
+    reportPosition(currentAddress)
+    addToLog(currentAddress)
 
