@@ -5,33 +5,39 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# list of email_id to send the mail
-li = ["EmergencyDistressSignal223@gmail.com"]
-newEmail = str(input("\nENTER AN EMAIL ADDRESS >> "))
-li.append(newEmail)
 
-email = "EmergencyDistressSignal223@gmail.com"
-password = str(input("\nENTER SERVER PASSWORD >> "))
-send_to_email = 'EmergencyDistressSignal223@gmail.com@gmail.com'
-subject = "+++ TEST MESSAGE +++"
-message = "THIS IS ONLY A TEST ..."
+def sendEmail(signal):
+    # list of email_id to send the mail
+    li = ["EmergencyDistressSignal223@gmail.com"]
+    newEmail = str(input("\nENTER AN EMAIL ADDRESS >> "))
+    li.append(newEmail)
 
-msg = MIMEMultipart()
-msg['From'] = email
-msg['To'] = send_to_email
-msg['Subject'] = subject
+    email = "EmergencyDistressSignal223@gmail.com"
+    password = str(input("\nENTER SERVER PASSWORD >> "))
+    send_to_email = 'EmergencyDistressSignal223@gmail.com'
+    subject = "+++ TEST MESSAGE +++"
+    message = signal
 
-# Attach the message to the MIMEMultipart object
-msg.attach(MIMEText(message, 'plain'))
+    msg = MIMEMultipart()
+    msg['From'] = email
+    msg['To'] = send_to_email
+    msg['Subject'] = subject
 
-for i in range(len(li)):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(email, password)
-    text = msg.as_string()
-    server.sendmail(email, li[i], text)
-server.quit()
+    # Attach the message to the MIMEMultipart object
+    msg.attach(MIMEText(message, 'plain'))
+
+    for i in range(len(li)):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(email, password)
+        text = msg.as_string()
+        server.sendmail(email, li[i], text)
+    server.quit()
+
 
 # EMERGENCY LOCATOR
 # EmergencyDistressSignal223@gmail.com
 # safe556Distress!
+
+content = "I am safe, this is a test message for our final project ..."
+sendEmail(content)
