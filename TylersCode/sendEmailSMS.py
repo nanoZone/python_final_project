@@ -6,11 +6,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # list of email_id to send the mail
-li = ["xxxxx@gmail.com", "yyyyy@gmail.com"]
+li = ["EmergencyDistressSignal223@gmail.com"]
 
-email = 'xxxxx@gmail.com'
+email = "EmergencyDistressSignal223@gmail.com"
 password = str(input("\nENTER PASSWORD >> "))
-send_to_email = 'xxxxx@gmail.com'
+send_to_email = 'EmergencyDistressSignal223@gmail.com@gmail.com'
 subject = "EMERGENCY DISTRESS"
 message = 'ALERT!!!'
 
@@ -22,11 +22,12 @@ msg['Subject'] = subject
 # Attach the message to the MIMEMultipart object
 msg.attach(MIMEText(message, 'plain'))
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.starttls()
-server.login(email, password)
-text = msg.as_string()
-server.sendmail(email, send_to_email, text)
+for i in range(len(li)):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(email, password)
+    text = msg.as_string()
+    server.sendmail(email, li[i], text)
 server.quit()
 
 # EMERGENCY LOCATOR
