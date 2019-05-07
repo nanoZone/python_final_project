@@ -8,9 +8,9 @@ from email.mime.multipart import MIMEMultipart
 # list of email_id to send the mail
 li = ["xxxxx@gmail.com", "yyyyy@gmail.com"]
 
-email = 'xxxx@gmail.com'
+email = 'xxxxx@gmail.com'
 password = str(input("\nENTER PASSWORD >> "))
-send_to_email = 'xxxx@gmail.com'
+send_to_email = 'xxxxx@gmail.com'
 subject = "EMERGENCY DISTRESS"
 message = 'ALERT!!!'
 
@@ -25,7 +25,7 @@ msg.attach(MIMEText(message, 'plain'))
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
 server.login(email, password)
-text = msg.as_string()# You now need to convert the MIMEMultipart object to a string to send
+text = msg.as_string()
 server.sendmail(email, send_to_email, text)
 server.quit()
 
