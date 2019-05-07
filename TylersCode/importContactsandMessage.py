@@ -7,16 +7,15 @@ It will save data to variables to be utilized with sending SMS/Emails.
 '''
 
 import os
-import time
 import re
-import datetime
 
 
 def findContactInfoInFile(file):
     os.getcwd()
     logFile = open(file)
-    emailList = re.findall('\S+@\S+', logFile.read())
-    phoneList = re.findall('\S[0-9]+\S+-\S[0-9]+', logFile.read())
+    string = logFile.read()
+    emailList = re.findall('\S+@\S+', string)
+    phoneList = re.findall('\S[0-9]+\S+-\S[0-9]+', string)
     # Printing of List
     print("Email addresses within this file are: ", emailList)
     print("Phone numbers within this file are: ", phoneList)
