@@ -8,6 +8,7 @@ It will save data to variables to be utilized with sending SMS/Emails.
 
 import os
 import time
+import re
 import datetime
 
 
@@ -21,17 +22,23 @@ def getLastLocation(file):
     return locationList
 
 
-def readFromFile(file):
-    os.getcwd()
-    logFile = open(file)
-    print(f"\n\nREADING CONTENTS OF FILE: {file}\n\n" + logFile.read())
-    time.sleep(1)
-    print(logFile.read())
-    logFile.close()
-
-
 def readFromFile(fileName):
     os.getcwd()
     logFile = open(fileName, 'r')
     # READLINES() IS A LIST OF STRINGS FOR EACH LINE
     return logFile.readlines()
+
+
+def findContactInfoInFile(file):
+    os.getcwd()
+    logFile = open(file)
+    print(f"\n\nREADING CONTENTS OF FILE: {file}\n\n" + logFile.read())
+    time.sleep(1)
+    emailList = re.findall('\S+@\S+', logFile.read())
+    phoneList = re.findall('\S[0-9]+\S+-\S[0-9]+', logFile.read())
+
+    # Printing of List
+    print("Email addresses within this file are: ", emailList)
+    print("Phone numbers within this file are: ", phoneList)
+
+    logFile.close()
