@@ -24,12 +24,20 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
+def sleepDecorator(func):
+    def wrapper():
+        time.sleep(2)
+        func()
+
+    return wrapper
+
+
 def sendEmail(signal, emailList):
     # list of email_id to send the mail
     email = "EmergencyDistressSignal223@gmail.com"
     password = str(input("\nENTER SERVER PASSWORD >> "))
     send_to_email = 'EmergencyDistressSignal223@gmail.com'
-    subject = "+++ TEST MESSAGE +++"
+    subject = "+++ EMERGENCY SIGNAL +++"
     message = signal
 
     msg = MIMEMultipart()
@@ -66,6 +74,7 @@ def exportAsPDF(message):
     pdf.output("Emergency_Data.pdf")
 
 
+@sleepDecorator
 def findWeatherData():
     # api key
     api_key = "9d0dd491847df6d883ef71401d8af3ec"
@@ -83,6 +92,7 @@ def findWeatherData():
     print("\nPrinting Weather Data: " + str(x))
     # check the value of "cod" key is equal to "404", means city is
     # found, otherwise city is not found
+    time.sleep(2)
     if x["cod"] != "404":
         # store value of main key in variable y
         y = x["main"]
@@ -130,8 +140,8 @@ def createLocationMap(locations):
 
 def getPreviousLocation(file):
     locationList = []
-    with open(file, 'rt') as myfile:    # Open file lorem.txt for reading text
-        for line in myfile:             # For each line, read it to a string
+    with open(file, 'rt') as myfile:  # Open file lorem.txt for reading text
+        for line in myfile:  # For each line, read it to a string
             if "LOCATION: " in line:
                 locationList.append(line.replace("LOCATION:", ''))
                 # print(line.replace("LOCATION:", ''))
@@ -148,7 +158,6 @@ def readContentsFromFile(file):
 
 
 def findContactInfoInFile(file):
-
     os.getcwd()
     logFile = open(file)
     string = logFile.read()
@@ -164,7 +173,6 @@ def findContactInfoInFile(file):
 
 
 def regexPhoneNumbers():
-
     # input statement
     s = input("Please provide best phone number xxx-xxx-xxxx, email.")
 
@@ -180,7 +188,6 @@ def regexPhoneNumbers():
 
 
 def enterContactInfo(targetFile):
-
     infoFile = open(targetFile, "w")
 
     # Personal
@@ -272,6 +279,10 @@ exportAsPDF(readLinesFromFile(emergencyInfoFile))
 # Show info file contents
 readContentsFromFile(emergencyInfoFile)
 
+# Look for contacts within data file
+print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} TO SEND UPDATE(s) ...")
+emails = findContactInfoInFile(emergencyInfoFile)
+
 # Start with a base location and status:
 currentPosition = checkPosition()
 currentStatus = checkCondition()
@@ -282,7 +293,6 @@ addToFile("STATUS: " + currentStatus, emergencyLogFile)
 
 # Show location:
 reportLocation(currentPosition, currentStatus)
-
 
 # Ask for location updates
 while True:
@@ -303,25 +313,23 @@ while True:
     # Pin point onto google maps
     reportLocation(currentPosition, currentStatus)
 
-
 # Track previous locations onto Google Maps
 createLocationMap(getPreviousLocation(emergencyLogFile))
 
-# Look for contacts within data file
-print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} TO SEND UPDATE(s) ...")
-emails = findContactInfoInFile(emergencyInfoFile)
-
 # Send data to them (SMS/Email)
-content = "I am safe, this is a test message for our final project ..."
+content = str(
+    "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
 sendEmail(content, emails)
 
 # Web scrape for local weather info
 findWeatherData()
 
 # Save logging to .pdf
+print("\nSAVING LOG DATA TO .pdf")
 exportAsPDF(readLinesFromFile(emergencyLogFile))
 
 # Show log file contents
+time.sleep(3)
 print(f"\nCONTENTS OF {emergencyLogFile} : \n")
 readContentsFromFile(emergencyLogFile)
 
