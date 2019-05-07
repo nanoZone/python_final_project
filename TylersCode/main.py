@@ -173,3 +173,11 @@ addToFile("STATUS: " + currentStatus, fileName001)
 readContentsFromFile(fileName001)
 readContentsFromFile(fileName002)
 '''
+
+# LAMBDA FUNCTIONS / DECORATORS
+# Logging
+# Location(s)
+# Google Maps
+# Contacts
+# Web scrape
+# PDF
