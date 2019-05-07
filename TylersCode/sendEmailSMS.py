@@ -1,12 +1,12 @@
-# Python code to illustrate Sending mail  
-# to multiple users  
-# from your Gmail account  
-import smtplib 
+# Python code to illustrate Sending mail
+# to multiple users
+# from your Gmail account
+import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# list of email_id to send the mail 
-li = ["xxxxx@gmail.com", "yyyyy@gmail.com"] 
+# list of email_id to send the mail
+li = ["xxxxx@gmail.com", "yyyyy@gmail.com"]
 
 email = 'xxxx@gmail.com'
 password = str(input("\nENTER PASSWORD >> "))
@@ -28,3 +28,7 @@ server.login(email, password)
 text = msg.as_string()# You now need to convert the MIMEMultipart object to a string to send
 server.sendmail(email, send_to_email, text)
 server.quit()
+
+# EMERGENCY LOCATOR
+# EmergencyDistressSignal223@gmail.com
+# safe556Distress!
