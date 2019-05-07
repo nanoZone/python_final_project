@@ -15,7 +15,7 @@ def findContactInfoInFile(file):
     logFile = open(file)
     string = logFile.read()
     emailList = re.findall('\S+@\S+', string)
-    phoneList = re.findall('\S[0-9]+\S+-\S[0-9]+', string)
+    phoneList = re.findall('\S[0-9]+\S[0-9]+\S[0-9]+', string)
     # Printing of List
     print("Email addresses within this file are: ", emailList)
     print("Phone numbers within this file are: ", phoneList)
@@ -24,7 +24,7 @@ def findContactInfoInFile(file):
 
 def regexPhoneNumbers():
     # input statement
-    s = input("Please provide best phone number xxx-xxx-xxxx, email,")
+    s = input("Please provide best phone number xxx-xxx-xxxx, email.")
     # \S matches any non-whitespace character
     # @ for as in the Email
     # + for Repeats a character one or more times
