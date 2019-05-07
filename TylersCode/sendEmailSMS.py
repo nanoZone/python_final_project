@@ -6,13 +6,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # list of email_id to send the mail
-li = ["EmergencyDistressSignal223@gmail.com"]
+li = ["EmergencyDistressSignal223@gmail.com", "tbramlet@uccs.edu"]
 
 email = "EmergencyDistressSignal223@gmail.com"
 password = str(input("\nENTER PASSWORD >> "))
 send_to_email = 'EmergencyDistressSignal223@gmail.com@gmail.com'
-subject = "EMERGENCY DISTRESS"
-message = 'ALERT!!!'
+subject = "+++ TEST MESSAGE +++"
+message = "THIS IS ONLY A TEST ..."
 
 msg = MIMEMultipart()
 msg['From'] = email
