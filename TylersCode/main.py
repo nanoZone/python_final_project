@@ -22,13 +22,15 @@ import os
 from fpdf import FPDF
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+import os.path
 
 
 def sleepDecorator(func):
     def wrapper():
         time.sleep(2)
         func()
-
     return wrapper
 
 
@@ -39,6 +41,7 @@ def sendEmail(signal, emailList):
     send_to_email = 'EmergencyDistressSignal223@gmail.com'
     subject = "+++ EMERGENCY SIGNAL +++"
     message = signal
+    file_location = 'C:\\Users\\Tyler\\PycharmProjects\\Homework2\\Emergency-Distress Program\\Emergency_Data.pdf'
 
     msg = MIMEMultipart()
     msg['From'] = email
@@ -47,6 +50,17 @@ def sendEmail(signal, emailList):
 
     # Attach the message to the MIMEMultipart object
     msg.attach(MIMEText(message, 'plain'))
+
+    # Setup the attachment
+    filename = os.path.basename(file_location)
+    attachment = open(file_location, "rb")
+    part = MIMEBase('application', 'octet-stream')
+    part.set_payload(attachment.read())
+    encoders.encode_base64(part)
+    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+    # Attach the attachment to the MIMEMultipart object
+    msg.attach(part)
 
     for i in range(len(emailList)):
         server = smtplib.SMTP('smtp.gmail.com', 587)
