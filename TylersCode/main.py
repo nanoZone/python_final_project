@@ -313,7 +313,7 @@ emails = findContactInfoInFile(emergencyInfoFile)
 
 # Send data to them (SMS/Email)
 content = "I am safe, this is a test message for our final project ..."
-sendEmail(content)
+sendEmail(content, emails)
 
 # Web scrape for local weather info
 findWeatherData()
