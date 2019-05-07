@@ -15,7 +15,8 @@ def findContactInfoInFile(file):
     logFile = open(file)
     string = logFile.read()
     emailList = re.findall('\S+@\S+', string)
-    phoneList = re.findall('\S[0-9]+\S[0-9]+\S[0-9]+', string)
+    phoneNumRegex = re.compile(r"(\d\d\d)-(\d\d\d)-(\d\d\d\d)")
+    phoneList = phoneNumRegex.findall(string)
     # Printing of List
     print("Email addresses within this file are: ", emailList)
     print("Phone numbers within this file are: ", phoneList)
