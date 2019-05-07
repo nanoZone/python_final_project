@@ -155,7 +155,6 @@ def enterContactInfo(targetFile):
 
     infoFile = open(targetFile, "a")
 
-    '''
     # Personal
     idNum = str(input("\nENTER A 5 DIGIT ID NUMBER:"))
     infoFile.write("ID Number: " + idNum + "\n")
@@ -173,7 +172,7 @@ def enterContactInfo(targetFile):
     infoFile.write("Medications: " + medications + "\n")
     bloodType = str(input("\nENTER A BLOODTYPE OR ENTER 'UNKNOWN':"))
     infoFile.write("BloodType: " + bloodType + "\n")
-    '''
+
     # I REMOVED THIS PART FOR TIME'S SAKE
     # Contacts:
 
@@ -233,4 +232,13 @@ readContentsFromFile(fileName002)
 
 print("\n\n\n+++ EMERGENCY DISTRESS PROGRAM +++")
 print("\n")
-print("\nHAVE YOU ENTERED ")
+# Loop and ask for data to enter or use a file
+# Save file to .pdf to share
+# Ask for location updates
+# Pin point onto google maps
+# Look for contacts within data file
+# Send data to them (SMS/Email)
+# Web scrape for weather info
+# Save logging to .pdf
+# Share logging file
+
