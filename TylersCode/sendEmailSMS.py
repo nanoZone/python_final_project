@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def sendEmail(signal):
+def sendEmail(signal, emailList):
     # list of email_id to send the mail
     li = ["EmergencyDistressSignal223@gmail.com"]
     newEmail = str(input("\nENTER AN EMAIL ADDRESS >> "))
