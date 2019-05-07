@@ -31,7 +31,6 @@ def addToFile(data, file):
 
 
 # Global vars to use across files:
-
 currentAddress = "F.E.M.A. Station Colorado Springs"
 currentStatus = "Safe, Battery Low, Uninjured"
 
