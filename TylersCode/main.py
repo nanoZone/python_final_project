@@ -271,7 +271,7 @@ while True:
 createLocationMap(getPreviousLocation(emergencyLogFile))
 
 # Look for contacts within data file
-print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} ...")
+print(f"\nFINDING CONTACT INFORMATION WITHIN {emergencyInfoFile} TO SEND UPDATE(s) ...")
 findContactInfoInFile(emergencyInfoFile)
 
 # Send data to them (SMS/Email)
