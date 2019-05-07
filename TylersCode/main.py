@@ -14,7 +14,6 @@ import datetime
 import os
 from fpdf import FPDF
 
-
 # Create decorator for pdf function, to read from file then exported as a .pdf
 def readLinesFromFile(fileName):
     os.getcwd()
@@ -152,8 +151,52 @@ def regexPhoneNumbers():
     print("phone numbers are: ", lst1)
 
 
-'''
+def enterContactInfo(targetFile):
 
+    infoFile = open(targetFile, "a")
+
+    '''
+    # Personal
+    idNum = str(input("\nENTER A 5 DIGIT ID NUMBER:"))
+    infoFile.write("ID Number: " + idNum + "\n")
+    personName = str(input("\nENTER A FIRST AND LAST NAME:"))
+    infoFile.write("Full Name: " + personName + "\n")
+    dateofbirth = str(input("\nENTER A DATE OF BIRTH IN THE FORMAT MM-DD-YYYY:"))
+    infoFile.write("Date Of Birth: " + dateofbirth + "\n")
+
+    # Medical
+    medCondition = str(input("\nENTER A MEDICAL CONDITION(S) OR ENTER N/A:"))
+    infoFile.write("Medical Condition(s): " + medCondition + "\n")
+    allergies = str(input("\nENTER ALLERGIES OR ENTER N/A:"))
+    infoFile.write("Allergy(s): " + allergies + "\n")
+    medications = str(input("\nENTER ANY MEDICATIONS OR ENTER N/A:"))
+    infoFile.write("Medications: " + medications + "\n")
+    bloodType = str(input("\nENTER A BLOODTYPE OR ENTER 'UNKNOWN':"))
+    infoFile.write("BloodType: " + bloodType + "\n")
+    '''
+    # I REMOVED THIS PART FOR TIME'S SAKE
+    # Contacts:
+
+    # Contact 1
+    contact1Name = str(input("\nENTER AN EMERGENCY CONTACT (FULL NAME):"))
+    infoFile.write("Contact 1 Name: " + contact1Name + "\n")
+    contact1Num = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
+    infoFile.write("Contact 1 Number: " + contact1Num + "\n")
+    # Contact 2
+    contact2Name = str(input("\nENTER A SECONDARY EMERGENCY CONTACT (FULL NAME):"))
+    infoFile.write("Contact 2 Name: " + contact2Name + "\n")
+    contact2Num = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
+    infoFile.write("Contact 2 Number: " + contact2Num + "\n")
+    # Contact 3
+    contact3Name = str(input("\nENTER A FINAL EMERGENCY CONTACT (FULL NAME):"))
+    infoFile.write("Contact 3 Name: " + contact3Name + "\n")
+    contact3Num = str(input("\nENTER THEIR PHONE NUMBER IN THE FORMAT 000-000-0000:"))
+    infoFile.write("Contact 3 Number: " + contact3Num + "\n")
+
+    infoFile.close()
+
+
+'''
 # Regex contact info within file
 findContactInfoInFile("EmergencyInfo.txt")
 
@@ -187,3 +230,7 @@ readContentsFromFile(fileName002)
 # Contacts
 # Web scrape
 # PDF
+
+print("\n\n\n+++ EMERGENCY DISTRESS PROGRAM +++")
+print("\n")
+print("\nHAVE YOU ENTERED ")
