@@ -263,6 +263,8 @@ emergencyInfoFile = "EmergencyInfo.txt"
 print("\n\n\n+++ EMERGENCY DISTRESS PROGRAM +++")
 print("\n")
 
+personName = str(input("\nENTER YOUR NAME: "))
+
 # Ask for data to enter or use a file to use instead
 c = 'N'
 print("\nWOULD YOU LIKE TO ENTER IN NEW PERSONAL/MEDICAL INFO [Y] OR USE ALREADY EXISTING DATA [N] ?")
@@ -294,7 +296,7 @@ reportLocation(currentPosition, currentStatus)
 
 # Send data to them (SMS/Email)
 content = str(
-    "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
+    "\nPERSON: " + personName + "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
 sendEmail(content, emails)
 
 # Ask for location updates
@@ -317,7 +319,7 @@ while True:
     reportLocation(currentPosition, currentStatus)
     # Send data to them (SMS/Email)
     content = str(
-        "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
+        "\nPERSON: " + personName + "\nCURRENT LOCATION: " + currentPosition + "\nCURRENT CONDITION/STATUS: " + currentStatus)
     sendEmail(content, emails)
 
 # Track previous locations onto Google Maps
