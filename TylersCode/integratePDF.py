@@ -28,16 +28,7 @@ def exportAsPDF(message):
     pdf.set_font("Courier", size=12)
     for line in message:
         pdf.cell(200, 10, txt=line, ln=1, align="A")
-    pdf.output("simple_demo.pdf")
+    pdf.output("emergencyDocument.pdf")
 
-
-def openPDF():
-    # WORK ON THIS
-    print("Hello There")
-
-def selectDataPDF():
-    # WORK ON THIS
-    print("General Kenobi")
 
 exportAsPDF(readFromFile("EmergencyLog.txt"))
-
