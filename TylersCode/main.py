@@ -14,6 +14,7 @@ import datetime
 import os
 from fpdf import FPDF
 
+
 # Create decorator for pdf function, to read from file then exported as a .pdf
 def readLinesFromFile(fileName):
     os.getcwd()
@@ -78,7 +79,7 @@ def reportLocation(address, status):
     print("LAST KNOWN LOCATION: " + str(address))
     print("PIN-POINTING POSITION ON GOOGLE MAPS ...\n")
     webbrowser.open("https://www.google.com/maps/search/" + str(address))
-
+    return address
 
 def createLocationMap(locations):
     if len(locations) >= 2:
@@ -195,6 +196,26 @@ def enterContactInfo(targetFile):
     infoFile.close()
 
 
+# SMALLER BASIC FUNCTIONS
+def checkPosition():
+    print("\nREPORT YOUR CURRENT POSITION/ADDRESS:\n")
+    address = str(input())
+    return address
+
+
+def checkCondition():
+    print("\nREPORT YOUR CURRENT CONDITION/HEALTH:\n")
+    status = str(input())
+    return status
+
+
+def displayCurrentTime():
+    ts = time.gmtime()
+    print("\nTIME STAMPED:")
+    print(time.strftime("%x %X", ts))
+    # 03/05/19 20:40:40
+
+
 '''
 # Regex contact info within file
 findContactInfoInFile("EmergencyInfo.txt")
@@ -223,12 +244,6 @@ readContentsFromFile(fileName002)
 '''
 
 # LAMBDA FUNCTIONS / DECORATORS
-# Logging
-# Location(s)
-# Google Maps
-# Contacts
-# Web scrape
-# PDF
 
 print("\n\n\n+++ EMERGENCY DISTRESS PROGRAM +++")
 print("\n")
