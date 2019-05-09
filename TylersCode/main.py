@@ -2,7 +2,6 @@
 Python Final Group Project
 CS 3030
 @group members: Tyler Bramlett, Lucas Garcia, Nate Ross
-
 This is a Emergency Distress program!
 This program will log/track/send/update data on a person in a disaster or emergency.
 This program will provide an interface and visually show a missing person's location history.
@@ -13,6 +12,7 @@ Emergency contacts will also receive updates on a person's status, condition, an
 '''
 
 import smtplib
+import logging
 import requests
 import re
 import webbrowser
